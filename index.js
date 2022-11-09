@@ -59,11 +59,7 @@ async function run() {
 
         
 
-        app.get('/orders', async (req, res) => {
-            const decoded = req.decoded;
-            if(decoded.email !== req.query.email){
-                res.status(403).send({message: 'unauthorized access'})
-            }
+        app.get('/review', async (req, res) => {
             let query = {};
             if (req.query.email) {
                 query = {
