@@ -78,16 +78,21 @@ async function run() {
 
         app.patch('/review/:id', async(req, res) => {
             const id = req.params.id;
-            const filter = {_id: ObjectId(id)};
             const query = {_id: ObjectId(id)};
-            const updateDoc = {
-                $set: {
-                    status: status
-                }
-            }
-            const result = await reviewCollection.updateOne(query, updateDoc);
-            res.send(result);
+            const updateReview = req.body;
+            console.log(updateReview)
         })
+        // app.patch('/review/:id', async(req, res) => {
+        //     const id = req.params.id;
+        //      const query = {_id: ObjectId(id)};
+        //     const updateDoc = {
+        //         $set: {
+        //             status: status
+        //         }
+        //     }
+        //     const result = await reviewCollection.updateOne(query, updateDoc);
+        //     res.send(result);
+        // })
 
         app.delete('/review/:id', async (req, res) => {
             const id = req.params.id;
