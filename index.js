@@ -76,23 +76,20 @@ async function run() {
             res.send(review);
         });
 
-        app.patch('/review/:id', async(req, res) => {
+        app.patch('/review/:id', async (req, res) => {
             const id = req.params.id;
-            const query = {_id: ObjectId(id)};
-            const updateReview = req.body;
-            console.log(updateReview)
+            const query = { _id: ObjectId(id) };
+            const rev = req.body;
+            const option = { upsert: true };
+            const updateReview = {
+                $set: {
+                    review: rev.review
+                }
+            }
+            const result = await reviewCollection.updateOne(query, updateReview, option);
+            res.send(result);
         })
-        // app.patch('/review/:id', async(req, res) => {
-        //     const id = req.params.id;
-        //      const query = {_id: ObjectId(id)};
-        //     const updateDoc = {
-        //         $set: {
-        //             status: status
-        //         }
-        //     }
-        //     const result = await reviewCollection.updateOne(query, updateDoc);
-        //     res.send(result);
-        // })
+        
 
         app.delete('/review/:id', async (req, res) => {
             const id = req.params.id;
