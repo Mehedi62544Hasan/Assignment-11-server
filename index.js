@@ -69,6 +69,10 @@ async function run() {
             res.send(reviews);
         });
 
+        app.delete('/review/:id', async(req, res) => {
+           
+        })
+
  
     }
     finally {
